@@ -23,6 +23,21 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: 'babel-loader'
+            },
+            {
+                test: /\.css$/i,
+                use: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            esModule: false,
+                            modules: {
+                                localIdentName: '[local]--[name]--[hash:base64:5]'
+                            }
+                        }
+                    }
+                ]
             }
         ]
     },
