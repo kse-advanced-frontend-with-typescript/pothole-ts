@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM, {Container} from 'react-dom/client';
-import styles from './main.css'
+import styles from './main.css';
 
 const App: React.FC = () => {
     const a: string = 'World!';
@@ -10,4 +10,6 @@ const App: React.FC = () => {
 const root = ReactDOM.createRoot(
     document.getElementById('root') as Container
 );
+
+//
 root.render(<App />);
