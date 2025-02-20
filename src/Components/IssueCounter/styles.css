@@ -1,0 +1,30 @@
+.issueCounter {
+    font-size: 1em;
+    font-family: 'Arial';
+    background: #000;
+    padding: 0.8em 1em;
+    display: inline-flex;
+    gap: 1em;
+    align-content: center;
+}
+
+.issueCounterActive {
+    background: #ccc;
+}
+
+.title {
+    color: #fff;
+    line-height: 1.2;
+}
+
+.counter {
+    color: #fff;
+    background: red;
+    font-size: 0.8em;
+    border-radius: 10em;
+    padding: 0.3em 0.5em;
+}
+
+.counterSolved {
+    background: green;
+}
