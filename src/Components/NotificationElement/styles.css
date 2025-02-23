@@ -1,0 +1,26 @@
+.notification {
+    font-family: 'Arial';
+    font-size: 1em;
+    color: #393939;
+    padding: 1em;
+    border: 1px solid #393939;
+    border-radius: 0.5em;
+}
+
+.error {
+    color: #7e0505;
+    background-color: #ca9393;
+    border-color: #7e0505;
+}
+
+.info {
+    color: #033770;
+    background-color: #6195ca;
+    border-color: #033770;
+}
+
+.warning {
+    color: #393939;
+    background-color: #cfcfcf;
+    border-color: #393939;
+}
