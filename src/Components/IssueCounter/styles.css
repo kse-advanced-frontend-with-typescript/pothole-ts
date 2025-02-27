@@ -1,0 +1,39 @@
+.issueCounter {
+    font-size: 1em;
+    font-family: 'Arial';
+    background-color: #000;
+    padding: 0.8em 1em;
+    display: inline-flex;
+    align-items: center;
+    gap: 1em;
+    align-content: center;
+}
+
+.issueCounter:hover {
+    background-color: #323131;
+}
+
+.issueCounterActive {
+    background-color: #323131;
+}
+
+.issueCounterActive:hover {
+    background-color: #000;
+}
+
+.title {
+    color: #fff;
+    line-height: 1.2;
+}
+
+.counter {
+    color: #fff;
+    background: red;
+    font-size: 0.8em;
+    border-radius: 10em;
+    padding: 0.3em 0.5em;
+}
+
+.counterSolved {
+    background: green;
+}
