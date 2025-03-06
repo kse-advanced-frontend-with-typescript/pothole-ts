@@ -1,0 +1,17 @@
+.controls {
+    display: flex;
+}
+
+.content {
+
+}
+
+.tab {
+    border: 0;
+    background: none;
+    font-size: 1em;
+}
+
+.tabActive {
+    border: 1px solid #3e3e3e;
+}
