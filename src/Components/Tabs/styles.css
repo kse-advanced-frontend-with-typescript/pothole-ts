@@ -3,15 +3,20 @@
 }
 
 .content {
-
+    border: 1px solid #c0c0c0;
 }
 
 .tab {
-    border: 0;
+    padding: 0.2em 0.5em;
+    border: 1px solid transparent;
     background: none;
     font-size: 1em;
+    border-radius: 0.3em 0.3em 0 0;
+    position: relative;
+    top: 1px;
 }
 
 .tabActive {
-    border: 1px solid #3e3e3e;
+    border: 1px solid #c0c0c0;
+    border-bottom-color: #fff;
 }

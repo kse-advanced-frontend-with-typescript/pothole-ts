@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './styles.css';
 import classNames from 'classnames';
 
@@ -12,18 +12,20 @@ type TabsProps = {
 
 export const Tabs: React.FC<TabsProps> = ({ tabs, activeTabIndex }) => {
     const index = activeTabIndex >= tabs.length ? tabs.length - 1 : activeTabIndex < 0 ? 0 : activeTabIndex;
+    const [tabIndex, setTabIndex] = useState(index);
+
     const onTabClick = (index: number) => () => {
-        alert(index);
+        setTabIndex(index);
     };
 
     return <>
             <div className={styles.controls}>
                 {tabs.map((tab, index) => {
-                    return <Tab onClick={onTabClick(index)} key={tab.title} type={index === activeTabIndex ? 'active' : 'normal'}>{tab.title}</Tab>;
+                    return <Tab onClick={onTabClick(index)} key={tab.title} type={index === tabIndex ? 'active' : 'normal'}>{tab.title}</Tab>;
                 })}
             </div>
             <div className={styles.content}>
-                {tabs[index].content}
+                {tabs[tabIndex].content}
             </div>
         </>;
 };
