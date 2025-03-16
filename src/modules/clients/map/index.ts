@@ -1,6 +1,8 @@
 import {Static, Type} from '@sinclair/typebox';
 import {TypeCompiler} from '@sinclair/typebox/compiler';
 import {ValueError} from '@sinclair/typebox/build/cjs/errors/errors';
+import {schemaErrorToError} from '../schemaErrorToError';
+import {convertToType} from '../convertToType';
 
 const MapItemSchema = Type.Object({
     _id: Type.String(),
@@ -76,14 +78,8 @@ export const initMapAPI = (api_key: string,
 
         const data = await response.json();
 
-        const Compiler = TypeCompiler.Compile(MapItemSchema);
-        const isValid = Compiler.Check(data);
 
-        if(isValid) {
-            return data;
-        }
-
-        throw schemaErrorToError(Compiler.Errors(data).First());
+        return convertToType(data, MapItemSchema);
     };
 
 
@@ -91,10 +87,5 @@ export const initMapAPI = (api_key: string,
         get,
         getDetails
     };
-};
-
-
-const schemaErrorToError  = (error: ValueError | undefined): Error => {
-    return Error(`Data is not valid: ${error?.path} (${error?.message})`);
 };
 
