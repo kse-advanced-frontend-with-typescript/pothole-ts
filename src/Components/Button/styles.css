@@ -1,0 +1,19 @@
+.button {
+    padding: 0.3em 0.5em;
+    background-color: #0e710e;
+    color: #fff;
+    border: 0;
+    border-radius: 0.2em;
+}
+
+.button:hover {
+    background-color: #0a5c0a;
+}
+
+.buttonFit {
+
+}
+
+.buttonFillAll {
+    background-color: #1165ff;
+}

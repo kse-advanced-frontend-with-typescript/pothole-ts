@@ -1,6 +1,5 @@
 import type {Meta, StoryObj} from '@storybook/react';
 
-import {Logo} from '../Components/Logo/Logo';
 import {IssueCounter} from '../Components/IssueCounter/IssueCounter';
 
 const meta: Meta<typeof IssueCounter> = {
