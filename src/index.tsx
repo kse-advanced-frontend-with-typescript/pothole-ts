@@ -4,7 +4,7 @@ import styles from './main.css';
 
 const App: React.FC = () => {
     const a: string = 'World!';
-    return <div className={styles.text}>Hello, world! {a}</div>;
+    return <div className={styles.text}>Hello, world! {a}{process.env.SOME_ANOTHER_VAR}</div>;
 };
 
 const root = ReactDOM.createRoot(
