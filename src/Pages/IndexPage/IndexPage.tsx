@@ -1,8 +1,16 @@
 import {Tabs} from '../../Components/Tabs/Tabs';
 import React from 'react';
+import {Button} from '../../Components/Button/Button';
+import styles from './styles.css';
+import {useNavigate} from 'react-router';
 
 export const IndexPage: React.FC = () => {
-    return <div>
+    const navigate = useNavigate();
+    const goToAddNewItemPage = () => {
+        navigate('/add');
+    };
+    return <>
+        <Button className={styles.button} onClick={goToAddNewItemPage} layout='fitContent'>Add new Item</Button>
         <Tabs activeTabIndex={0} tabs={[
             {
                 title: 'Tab 1',
@@ -13,5 +21,5 @@ export const IndexPage: React.FC = () => {
                 content: <p>Hello from Tab 2</p>
             }
         ]}></Tabs>
-    </div>;
+    </>;
 };

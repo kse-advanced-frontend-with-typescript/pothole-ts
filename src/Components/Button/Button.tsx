@@ -6,10 +6,11 @@ type ButtonType = {
     layout: 'fitContent' | 'fillAll'
     children: React.ReactNode
     onClick?: () => void
+    className?: string
 }
 
-export const Button: React.FC<ButtonType> = ({children, layout, onClick}) => {
-    return <button className={classNames(styles.button, {
+export const Button: React.FC<ButtonType> = ({children, layout, onClick, className}) => {
+    return <button className={classNames(styles.button, className, {
         [styles.buttonFit]: layout === 'fitContent',
         [styles.buttonFillAll]: layout === 'fillAll'
     })} onClick={onClick}>{children}</button>;
