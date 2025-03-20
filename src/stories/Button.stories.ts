@@ -6,7 +6,7 @@ const meta: Meta<typeof Button> = {
     component: Button,
     title: 'Example/Button',
     args: {
-        content: 'Send',
+        children: 'Send',
         layout: 'fillAll'
     }
 };
