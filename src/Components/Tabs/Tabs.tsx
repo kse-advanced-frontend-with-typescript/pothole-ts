@@ -18,7 +18,7 @@ export const Tabs: React.FC<TabsProps> = ({ tabs, activeTabIndex }) => {
         setTabIndex(index);
     };
 
-    return <>
+    return <div className={styles.wrapper}>
             <div className={styles.controls}>
                 {tabs.map((tab, index) => {
                     return <Tab onClick={onTabClick(index)} key={tab.title} type={index === tabIndex ? 'active' : 'normal'}>{tab.title}</Tab>;
@@ -27,7 +27,7 @@ export const Tabs: React.FC<TabsProps> = ({ tabs, activeTabIndex }) => {
             <div className={styles.content}>
                 {tabs[tabIndex].content}
             </div>
-        </>;
+        </div>;
 };
 
 
