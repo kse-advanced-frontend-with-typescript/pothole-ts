@@ -8,10 +8,10 @@ import {IssueCounter} from './Components/IssueCounter/IssueCounter';
 import {Login} from './Components/Login/Login';
 import {LoginPage} from './Pages/loginPage/loginPage';
 import {AddItemPage} from './Pages/addItemPage/AddItemPage';
-import {AppContext} from "./context";
+import {AppContext} from './context';
 
 export const App: React.FC = () => {
-    const [context, setContext] = useState({ user: null })
+    const [context, setContext] = useState({ user: null });
     return <>
         <AppContext.Provider value={context}>
             <div className={styles.wrapper}>
