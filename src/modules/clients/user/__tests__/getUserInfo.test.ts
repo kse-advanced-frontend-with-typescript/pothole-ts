@@ -5,7 +5,7 @@ describe('User API: getUserInfo', () => {
     const API_KEY = 'API_KEY';
 
     describe('when user exists', () => {
-        const body: User = [{
+        const body: User[] = [{
             _id: '123',
             login: 'some',
             token: 'token123',
@@ -29,7 +29,7 @@ describe('User API: getUserInfo', () => {
     });
 
     describe('when user does not exist', () => {
-        const body: User = [];
+        const body: User[] = [];
 
         const fetchMocked = jest.fn().mockImplementation(() => {
             return new Response(JSON.stringify(body), {

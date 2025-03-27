@@ -6,6 +6,10 @@
     border-radius: 0.2em;
 }
 
+.button:disabled {
+    opacity: 0.5;
+}
+
 .button:hover {
     background-color: #0a5c0a;
 }

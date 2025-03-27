@@ -9,11 +9,24 @@ import {Login} from './Components/Login/Login';
 import {LoginPage} from './Pages/loginPage/loginPage';
 import {AddItemPage} from './Pages/addItemPage/AddItemPage';
 import {AppContext} from './context';
+import {initUserAPI, User} from './modules/clients/user';
+
+
 
 export const App: React.FC = () => {
-    const [context, setContext] = useState({ user: null });
+    const [context, setContext] = useState<{user?: User}>({ });
+    const userAPI = initUserAPI(process.env.API_KEY ?? '', fetch);
+
+
     return <>
-        <AppContext.Provider value={context}>
+        <AppContext.Provider value={{
+            ...context,
+            setUser: (user) =>  setContext({
+                ...context,
+                user
+            }),
+            userAPI
+        }}>
             <div className={styles.wrapper}>
                 <header className={styles.header}>
                     <Header>

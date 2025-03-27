@@ -62,7 +62,7 @@ export const Map: React.FC<MapProps> = ({ points }) => {
     };
 
     const onUnmount = React.useCallback(function callback() {
-        // @ts-ignore
+        // @ts-expect-error We will fix it later
         setMap(null);
     }, []);
 
