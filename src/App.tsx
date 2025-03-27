@@ -68,7 +68,8 @@ export const App: React.FC = () => {
             ...context,
             setUser,
             cleanUser,
-            userAPI
+            userAPI,
+            mapAPI
         }}>
             <div className={styles.wrapper}>
                 <header className={styles.header}>
