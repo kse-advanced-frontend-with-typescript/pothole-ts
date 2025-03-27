@@ -3,8 +3,9 @@ import styles from './styles.css';
 
 type LoginProps = {
     isLogged: boolean
+    onClick?: () => void
 }
 
-export const Login: React.FC<LoginProps> = ({ isLogged }) => {
-    return <div className={styles.login}>{isLogged ? 'Log out' : 'Log In'}</div>;
+export const Login: React.FC<LoginProps> = ({ isLogged, onClick }) => {
+    return <div onClick={() => onClick?.()} className={styles.login}>{isLogged ? 'Log out' : 'Log In'}</div>;
 };

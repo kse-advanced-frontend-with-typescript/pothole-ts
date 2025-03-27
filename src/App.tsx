@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link, Route, Routes} from 'react-router';
 import {IndexPage} from './Pages/IndexPage/IndexPage';
 import styles from './main.css';
@@ -17,14 +17,39 @@ export const App: React.FC = () => {
     const [context, setContext] = useState<{user?: User}>({ });
     const userAPI = initUserAPI(process.env.API_KEY ?? '', fetch);
 
+    const setUser = (user: User) => {
+        const token = user.token;
+        userAPI.saveToken(token);
+
+        setContext({
+            ...context,
+            user
+        });
+    };
+
+    const cleanUser = () => {
+        setContext({
+            ...context,
+            user: undefined
+        });
+
+        userAPI.cleanToken();
+    };
+
+    useEffect(() => {
+        const token = userAPI.restoreToken();
+        if (!token) return;
+
+        userAPI.getUserInfo(token).then(user => {
+            setUser(user);
+        }).catch(console.error);
+    }, []);
 
     return <>
         <AppContext.Provider value={{
             ...context,
-            setUser: (user) =>  setContext({
-                ...context,
-                user
-            }),
+            setUser,
+            cleanUser,
             userAPI
         }}>
             <div className={styles.wrapper}>
@@ -36,7 +61,12 @@ export const App: React.FC = () => {
                             <IssueCounter counter={42} title='Solved' kind='solved' isActive={false}/>
                         </HeaderLeft>
                         <HeaderRight>
-                            <Link to={'/login'}><Login isLogged={false}/></Link>
+                            {context.user?._id ?
+                                <Login onClick={cleanUser} isLogged={true}/>
+                                :
+                                <Link to={'/login'}><Login isLogged={false}/></Link>
+                            }
+
                         </HeaderRight>
                     </Header>
                 </header>

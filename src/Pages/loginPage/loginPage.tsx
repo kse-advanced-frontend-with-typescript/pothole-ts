@@ -3,14 +3,19 @@ import styles from './style.css';
 import {useContext, useRef, useState} from 'react';
 import {AppContext} from '../../context';
 import {NotificationElement} from '../../Components/NotificationElement/NotificationElement';
+import {useNavigate} from 'react-router';
 
 export const LoginPage: React.FC = () => {
+    const navigate = useNavigate();
     const login = useRef<HTMLInputElement>(null);
     const pass = useRef<HTMLInputElement>(null);
     const context = useContext(AppContext);
     const [error, setError] = useState<string>();
     const [isProcessing, setIsProcessing] = useState<boolean>(false);
 
+    if (context.user?._id) {
+        navigate('/');
+    }
 
     const onLoginSubmit: React.FormEventHandler = async (e) => {
         setError('');

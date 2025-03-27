@@ -13,6 +13,9 @@ const UserSchema = Type.Array(UserItemSchema);
 export type User = Static<typeof UserItemSchema>
 
 export const initUserAPI = (api_key: string, fetchAPI: typeof fetch) => {
+    const SESSION_KEY = 'sessionKey';
+
+
     const getUserByToken = async (login: string, password: string): Promise<User> => {
         const headers = new Headers();
         headers.set('x-apikey', api_key);
@@ -86,10 +89,25 @@ export const initUserAPI = (api_key: string, fetchAPI: typeof fetch) => {
         throw Error('User does not exist');
     };
 
+    const restoreToken = (): string | null => {
+        return window.localStorage.getItem(SESSION_KEY);
+    };
+
+    const cleanToken = (): void => {
+        window.localStorage.removeItem(SESSION_KEY);
+    };
+
+    const saveToken = (token: string): void => {
+        window.localStorage.setItem(SESSION_KEY, token);
+    };
+
 
     return {
         getUserByToken,
-        getUserInfo
+        getUserInfo,
+        restoreToken,
+        saveToken,
+        cleanToken
     };
 };
 
