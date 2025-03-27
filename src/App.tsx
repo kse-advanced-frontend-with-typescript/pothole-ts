@@ -10,12 +10,19 @@ import {LoginPage} from './Pages/loginPage/loginPage';
 import {AddItemPage} from './Pages/addItemPage/AddItemPage';
 import {AppContext} from './context';
 import {initUserAPI, User} from './modules/clients/user';
+import {initMapAPI} from './modules/clients/map';
 
 
 
 export const App: React.FC = () => {
     const [context, setContext] = useState<{user?: User}>({ });
+    const [stats, setStats] = useState<{opened: number, closed: number}>({
+        opened: 0,
+        closed: 0
+    });
+
     const userAPI = initUserAPI(process.env.API_KEY ?? '', fetch);
+    const mapAPI = initMapAPI(process.env.API_KEY ?? '', fetch);
 
     const setUser = (user: User) => {
         const token = user.token;
@@ -35,6 +42,17 @@ export const App: React.FC = () => {
 
         userAPI.cleanToken();
     };
+
+    useEffect(() => {
+        mapAPI.getStat().then(stat => {
+            const isDone = stat.true['COUNT isDone'];
+            const isOpened = stat.false['COUNT isDone'] + stat.undefined['COUNT isDone'];
+            setStats({
+                opened: isOpened,
+                closed: isDone
+            });
+        });
+    }, []);
 
     useEffect(() => {
         const token = userAPI.restoreToken();
@@ -57,8 +75,8 @@ export const App: React.FC = () => {
                     <Header>
                         <HeaderLeft>
                             <Link to={'/'}><Logo/></Link>
-                            <IssueCounter counter={84} title='Issues' kind='issue' isActive={false}/>
-                            <IssueCounter counter={42} title='Solved' kind='solved' isActive={false}/>
+                            <IssueCounter counter={stats.opened} title='Issues' kind='issue' isActive={false}/>
+                            <IssueCounter counter={stats.closed} title='Solved' kind='solved' isActive={false}/>
                         </HeaderLeft>
                         <HeaderRight>
                             {context.user?._id ?

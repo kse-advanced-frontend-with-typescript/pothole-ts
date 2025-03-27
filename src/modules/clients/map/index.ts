@@ -98,9 +98,10 @@ export const initMapAPI = (api_key: string,
 
         const params = new URLSearchParams();
         params.set('h', JSON.stringify(filter));
+        params.set('q', JSON.stringify({}));
+        console.log(JSON.stringify(filter));
 
-
-        const response =  await fetchAPI('https://mapstorage-7e78.restdb.io/rest/mapitem/', {
+        const response =  await fetchAPI('https://mapstorage-7e78.restdb.io/rest/mapitem?' + params.toString(), {
             headers
         });
 
