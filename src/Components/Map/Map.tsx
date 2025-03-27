@@ -1,16 +1,16 @@
-import React, { useEffect } from 'react'
-import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api'
-import { generatePath, useNavigate } from 'react-router'
+import React, { useEffect } from 'react';
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
+import { generatePath, useNavigate } from 'react-router';
 
 const containerStyle = {
     width: '100%',
     height: 'calc(100vh - 10rem)'
-}
+};
 
 const center = {
     lat: -3.745,
     lng: -38.523
-}
+};
 
 type Point = {
     _id: number
@@ -29,42 +29,42 @@ type MapInstance = {
 }
 
 export const Map: React.FC<MapProps> = ({ points }) => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
         googleMapsApiKey: process.env.MAP_KEY ?? ''
-    })
+    });
 
-    const [map, setMap] = React.useState<MapInstance>()
+    const [map, setMap] = React.useState<MapInstance>();
 
     const onLoad = React.useCallback(
         function callback(map: MapInstance) {
-            fitMap(map, points)
+            fitMap(map, points);
 
-            setMap(map)
+            setMap(map);
         },
         [points]
-    )
+    );
 
     useEffect(() => {
-        if (!map) return
+        if (!map) return;
 
-        fitMap(map, points)
-    }, [map, points])
+        fitMap(map, points);
+    }, [map, points]);
 
     const fitMap = (map: MapInstance, points: Point[]) => {
-        const bounds = new window.google.maps.LatLngBounds()
+        const bounds = new window.google.maps.LatLngBounds();
 
-        points.forEach((point) => bounds.extend({ lat: Number(point.lat), lng: Number(point.lng) }))
+        points.forEach((point) => bounds.extend({ lat: Number(point.lat), lng: Number(point.lng) }));
 
-        map.fitBounds(bounds)
-        map.setZoom(3)
-    }
+        map.fitBounds(bounds);
+        map.setZoom(3);
+    };
 
     const onUnmount = React.useCallback(function callback() {
         // @ts-ignore
-        setMap(null)
-    }, [])
+        setMap(null);
+    }, []);
 
     return isLoaded ? (
             <GoogleMap
@@ -79,7 +79,7 @@ export const Map: React.FC<MapProps> = ({ points }) => {
                     <Marker
                         key={point._id}
                 onClick={() => {
-        navigate(generatePath('/issue/:id', { id: point._id.toString() }))
+        navigate(generatePath('/issue/:id', { id: point._id.toString() }));
     }}
     position={{
         lat: Number(point.lat),
@@ -91,5 +91,5 @@ export const Map: React.FC<MapProps> = ({ points }) => {
     </GoogleMap>
 ) : (
         <></>
-    )
-}
+    );
+};
