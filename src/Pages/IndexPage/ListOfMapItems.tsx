@@ -3,10 +3,11 @@ import {MapItem, MapItemResult} from '../../modules/clients/map';
 import {NotificationElement} from '../../Components/NotificationElement/NotificationElement';
 import {AppContext} from '../../context';
 import {PageItem, Pagination} from '../../Components/Pagination/Pagination';
+import {Link} from 'react-router';
 
-export const ListOfMapItems: React.FC = () => {
+export const ListOfMapItems: React.FC<{currentPage: number}> = ({ currentPage }) => {
     const PER_PAGE = 5;
-    const [startWith, setStartWith] = useState<number>(0);
+    const startWith = (currentPage - 1) * PER_PAGE;
     const [total, setTotal] = useState<number>(0);
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -41,7 +42,7 @@ export const ListOfMapItems: React.FC = () => {
         <Pagination>
             <>
                 {pages.map(page => {
-                   return <PageItem key={page} isActive={false}>{page}</PageItem>;
+                    return <Link key={page} to={`/page/${page}`}><PageItem isActive={page === currentPage}>{page}</PageItem></Link>;
                 })}
             </>
         </Pagination>

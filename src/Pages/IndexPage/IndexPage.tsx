@@ -2,11 +2,12 @@ import {Tabs} from '../../Components/Tabs/Tabs';
 import React from 'react';
 import {Button} from '../../Components/Button/Button';
 import styles from './styles.css';
-import {useNavigate} from 'react-router';
+import {useNavigate, useParams} from 'react-router';
 import {ListOfMapItems} from './ListOfMapItems';
 
 export const IndexPage: React.FC = () => {
     const navigate = useNavigate();
+    const params = useParams<{page: string}>();
     const goToAddNewItemPage = () => {
         navigate('/add');
     };
@@ -19,7 +20,7 @@ export const IndexPage: React.FC = () => {
             },
             {
                 title: 'Tab 2',
-                content: <ListOfMapItems />
+                content: <ListOfMapItems currentPage={parseInt(params.page ?? '1')} />
             }
         ]}></Tabs>
     </>;

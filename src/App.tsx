@@ -92,6 +92,7 @@ export const App: React.FC = () => {
                 <div className={styles.content}>
                     <Routes>
                         <Route index element={<IndexPage/>}/>
+                        <Route path="/page/:page?" element={<IndexPage/>}/>
                         <Route path="login" element={<LoginPage />}/>
                         <Route path="add" element={<AddItemPage />}/>
                     </Routes>
