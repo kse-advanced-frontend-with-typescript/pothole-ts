@@ -115,11 +115,36 @@ export const initMapAPI = (api_key: string,
         return convertToType(data, MapStatSchema);
     };
 
+    const create = async (title: string, lat: number, lng: number) => {
+        const headers = new Headers();
+        headers.set('x-apikey', api_key);
+        headers.set('Content-Type', 'application/json');
+        headers.set('cache-control', 'no-cache');
+
+        const response =  await fetchAPI('https://mapstorage-7e78.restdb.io/rest/mapitem', {
+            method: 'POST',
+            body: JSON.stringify({
+                title,
+                lat,
+                lng
+            }),
+            headers
+        });
+
+        if (!response.ok) {
+            throw Error(`Could not fetch map item: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return convertToType(data, MapItemSchema);
+    };
+
 
     return {
         get,
         getDetails,
-        getStat
+        getStat,
+        create
     };
 };
 
