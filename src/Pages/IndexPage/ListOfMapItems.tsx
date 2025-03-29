@@ -4,6 +4,7 @@ import {NotificationElement} from '../../Components/NotificationElement/Notifica
 import {AppContext} from '../../context';
 import {PageItem, Pagination} from '../../Components/Pagination/Pagination';
 import {Link} from 'react-router';
+import styles from './ListOfMapItems.css';
 
 export const ListOfMapItems: React.FC<{currentPage: number}> = ({ currentPage }) => {
     const PER_PAGE = 5;
@@ -31,11 +32,11 @@ export const ListOfMapItems: React.FC<{currentPage: number}> = ({ currentPage })
     return <>
         {items.length < 1 && <NotificationElement message="No elements" level="info" />}
         <br />
-        {isLoading && 'Loading...'}
+        {isLoading && <p className={styles.loading}>Loading...</p>}
         <br />
-        <ul>
+        <ul  className={styles.items}>
             {items.map(item => {
-                return <div key={item._id}>{item.title}</div>;
+                return <Link key={item._id} to={`/issue/${item._id}`}><li>{item.title}</li></Link>;
             })}
         </ul>
 
