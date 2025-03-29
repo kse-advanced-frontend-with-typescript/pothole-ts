@@ -1,0 +1,13 @@
+.wrapper {
+    margin: 2%;
+    font-size: 14px;
+}
+
+.wrapper h2 {
+    font-size: 20px;
+    margin: 0 0 10px 0;
+}
+
+.wrapper li {
+    padding: 0 0 2%;
+}

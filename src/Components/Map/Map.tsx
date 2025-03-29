@@ -13,7 +13,7 @@ const center = {
 };
 
 type Point = {
-    _id: number
+    _id: string
     lat: number | string
     lng: number | string
 }

@@ -8,7 +8,7 @@ const meta: Meta<typeof Map> = {
     args: {
         points: [
             {
-                _id: 1,
+                _id: '1',
                 lat: -3.745,
                 lng: -38.523
             }

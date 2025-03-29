@@ -11,6 +11,7 @@ import {AddItemPage} from './Pages/addItemPage/AddItemPage';
 import {AppContext} from './context';
 import {initUserAPI, User} from './modules/clients/user';
 import {initMapAPI} from './modules/clients/map';
+import {DetailPage} from './Pages/IndexPage/DetailPage';
 
 
 
@@ -93,6 +94,7 @@ export const App: React.FC = () => {
                     <Routes>
                         <Route index element={<IndexPage/>}/>
                         <Route path="/page/:page?" element={<IndexPage/>}/>
+                        <Route path="/issue/:id" element={<DetailPage/>}/>
                         <Route path="login" element={<LoginPage />}/>
                         <Route path="add" element={<AddItemPage />}/>
                     </Routes>
