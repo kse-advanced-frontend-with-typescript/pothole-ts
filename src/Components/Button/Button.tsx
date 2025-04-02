@@ -4,13 +4,15 @@ import classNames from 'classnames';
 
 type ButtonType = {
     layout: 'fitContent' | 'fillAll'
-    content: React.ReactNode
-    onClick: () => void
+    children: React.ReactNode
+    disabled?: boolean
+    onClick?: () => void
+    className?: string
 }
 
-export const Button: React.FC<ButtonType> = ({content, layout, onClick}) => {
-    return <button className={classNames(styles.button, {
+export const Button: React.FC<ButtonType> = ({children, layout, onClick, className, disabled}) => {
+    return <button disabled={disabled} className={classNames(styles.button, className, {
         [styles.buttonFit]: layout === 'fitContent',
         [styles.buttonFillAll]: layout === 'fillAll'
-    })} onClick={() => onClick()}>{content}</button>;
+    })} onClick={onClick}>{children}</button>;
 };

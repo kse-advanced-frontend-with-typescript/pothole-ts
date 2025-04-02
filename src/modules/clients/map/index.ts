@@ -1,6 +1,5 @@
 import {Static, Type} from '@sinclair/typebox';
 import {TypeCompiler} from '@sinclair/typebox/compiler';
-import {ValueError} from '@sinclair/typebox/build/cjs/errors/errors';
 import {schemaErrorToError} from '../schemaErrorToError';
 import {convertToType} from '../convertToType';
 
@@ -22,8 +21,15 @@ const MapItemResultSchema = Type.Object({
     })
 });
 
+const MapStatSchema = Type.Object({
+    false: Type.Record(Type.Literal('COUNT isDone'), Type.Number()),
+    true: Type.Record(Type.Literal('COUNT isDone'), Type.Number()),
+    undefined: Type.Record(Type.Literal('COUNT isDone'), Type.Number()),
+});
+
 export type MapItem = Static<typeof MapItemSchema>
 export type MapItemResult = Static<typeof MapItemResultSchema>
+export type MapStat = Static<typeof MapStatSchema>
 
 
 export const initMapAPI = (api_key: string,
@@ -82,10 +88,63 @@ export const initMapAPI = (api_key: string,
         return convertToType(data, MapItemSchema);
     };
 
+    const getStat = async () => {
+        const headers = new Headers();
+        headers.set('x-apikey', api_key);
+        headers.set('Content-Type', 'application/json');
+        headers.set('cache-control', 'no-cache');
+
+        const filter = { $aggregate: ['COUNT:isDone'], $groupby: ['isDone'] };
+
+        const params = new URLSearchParams();
+        params.set('h', JSON.stringify(filter));
+        params.set('q', JSON.stringify({}));
+        console.log(JSON.stringify(filter));
+
+        const response =  await fetchAPI('https://mapstorage-7e78.restdb.io/rest/mapitem?' + params.toString(), {
+            headers
+        });
+
+        if (!response.ok) {
+            throw Error(`Could not fetch map item: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+
+
+        return convertToType(data, MapStatSchema);
+    };
+
+    const create = async (title: string, lat: number, lng: number) => {
+        const headers = new Headers();
+        headers.set('x-apikey', api_key);
+        headers.set('Content-Type', 'application/json');
+        headers.set('cache-control', 'no-cache');
+
+        const response =  await fetchAPI('https://mapstorage-7e78.restdb.io/rest/mapitem', {
+            method: 'POST',
+            body: JSON.stringify({
+                title,
+                lat,
+                lng
+            }),
+            headers
+        });
+
+        if (!response.ok) {
+            throw Error(`Could not fetch map item: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return convertToType(data, MapItemSchema);
+    };
+
 
     return {
         get,
-        getDetails
+        getDetails,
+        getStat,
+        create
     };
 };
 

@@ -1,0 +1,18 @@
+.items {
+    padding: 0 0 0 3%;
+}
+
+.items a {
+    color: #000;
+}
+
+.items li {
+    padding: 0 0 3% 0;
+}
+
+.loading {
+    font-size: 16px;
+    padding: 3%;
+    color: #6195ca;
+}
+
