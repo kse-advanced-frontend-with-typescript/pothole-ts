@@ -9,6 +9,9 @@ npm install cypress --save-dev
 npm install cypress-match-screenshot --save-dev 
 ```
 3. Add `"cy": "cypress open"` to `scripts` section in `package.json`
+```bash
+npm run cy
+```
 4. Add `require('cypress-match-screenshot').register()` to `cypress/support/commands.ts`
 5. Start Cypress
 ```bash

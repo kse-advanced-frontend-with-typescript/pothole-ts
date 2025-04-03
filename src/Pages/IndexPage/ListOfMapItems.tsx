@@ -23,7 +23,7 @@ export const ListOfMapItems: React.FC<{currentPage: number}> = ({ currentPage })
             setTotal(res.totals.total);
             setItems(res.data);
             setIsLoading(false);
-        });
+        }).catch(console.error);
     }, [ startWith ]);
 
     const numberOfPages = Math.ceil(total / PER_PAGE);
@@ -36,7 +36,7 @@ export const ListOfMapItems: React.FC<{currentPage: number}> = ({ currentPage })
         <br />
         <ul  className={styles.items}>
             {items.map(item => {
-                return <Link key={item._id} to={`/issue/${item._id}`}><li>{item.title}</li></Link>;
+                return <li key={item._id}><Link to={`/issue/${item._id}`}><li>{item.title}</li></Link></li>;
             })}
         </ul>
 

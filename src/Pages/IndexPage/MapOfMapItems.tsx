@@ -22,7 +22,7 @@ export const MapOfMapItems: React.FC = () => {
             setTotal(res.totals.total);
             setItems(res.data);
             setIsLoading(false);
-        });
+        }).catch(console.error);
     }, [  ]);
 
 
