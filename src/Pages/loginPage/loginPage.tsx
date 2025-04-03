@@ -37,7 +37,7 @@ export const LoginPage: React.FC = () => {
             </div>
 
             <div  className={styles.row}>
-                <input ref={pass} className={styles.input} type="pasword"  placeholder='password'/>
+                <input ref={pass} className={styles.input} type="password"  placeholder='password'/>
             </div>
 
             <div className={styles.row}>
