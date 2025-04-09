@@ -52,7 +52,7 @@ export const App: React.FC = () => {
                 opened: isOpened,
                 closed: isDone
             });
-        });
+        }).catch(console.error);
     }, []);
 
     useEffect(() => {

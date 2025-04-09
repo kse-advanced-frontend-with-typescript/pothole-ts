@@ -9,6 +9,9 @@ module.exports = {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist')
     },
+    devServer: {
+        historyApiFallback: true
+    },
     resolve: {
         extensions: ['.tsx', '.ts', '.js']
     },
@@ -48,5 +51,5 @@ module.exports = {
             template: './public/index.html'
         }),
         new Dotenv()
-    ]
+    ],
 };

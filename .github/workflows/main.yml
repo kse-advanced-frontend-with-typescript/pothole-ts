@@ -53,7 +53,10 @@ jobs:
             ./node_modules
       - run: npm run build
 
-
+  publish:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    uses: kse-advanced-frontend-with-typescript/pothole-ts/.github/workflows/github-pages.yml@main
 
 
 
