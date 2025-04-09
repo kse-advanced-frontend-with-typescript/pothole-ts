@@ -51,8 +51,8 @@ jobs:
           key: ${{ runner.os }}-build-dependencies-${{ hashFiles('**/package-lock.json') }}
           path: |
             ./node_modules
-      - run: | 
-          npm run build
+      - run: |
+          BASE_URL=/${{ github.event.repository.name }} MAP_KEY=${{ secrets.MAP_KEY }} API_KEY=${{ secrets.API_KEY }} npm run build
           cp ./dist/index.html ./dist/404.html
       - name: Archive artifacts
         uses: actions/upload-artifact@v4
@@ -62,7 +62,7 @@ jobs:
 
   publish:
     needs: build
-    if: github.ref == 'refs/heads/main'
+#    if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/github-pages.yml
 
 
