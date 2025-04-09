@@ -1,7 +1,9 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
-const Dotenv = require('dotenv-webpack');
+const dotenv = require('dotenv')
+const webpack = require('webpack')
 
+const localEnv = dotenv.config().parsed
 
 module.exports = {
     entry: './src/index.tsx',
@@ -50,6 +52,14 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './public/index.html'
         }),
-        new Dotenv()
+        new webpack.DefinePlugin({
+            'process.env.BASE_URL': JSON.stringify(process.env.BASE_URL),
+            'process.env.MAP_KEY': localEnv.MAP_KEY
+                ? JSON.stringify(localEnv.MAP_KEY)
+                : JSON.stringify(process.env.MAP_KEY),
+            'process.env.API_KEY': localEnv.API_KEY
+                ? JSON.stringify(localEnv.API_KEY)
+                : JSON.stringify(process.env.API_KEY)
+        })
     ],
 };
