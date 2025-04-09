@@ -7,8 +7,8 @@ on:
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
-  id-token: write
   pages: write
+  id-token: write
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
@@ -42,7 +42,5 @@ jobs:
           path: './'
 
       - name: Deploy to GitHub Pages
-        env:
-          ACTIONS_RUNTIME_TOKEN: ${{ secrets.PAT }}
         id: deployment
         uses: actions/deploy-pages@v4
