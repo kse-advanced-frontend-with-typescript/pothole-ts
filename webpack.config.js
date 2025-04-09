@@ -8,8 +8,10 @@ const localEnv = dotenv.config().parsed
 module.exports = {
     entry: './src/index.tsx',
     output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist')
+        filename: '[name]-[fullhash].js',
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: process.env.BASE_URL ?? '/',
+        clean: true
     },
     devServer: {
         historyApiFallback: true
