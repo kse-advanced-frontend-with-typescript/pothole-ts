@@ -41,7 +41,7 @@ jobs:
     needs: check-linter
     env:
       MAP_KEY: ${{ secrets.MAP_KEY }}
-      MAP_KEY: ${{ secrets.API_KEY }}
+      API_KEY: ${{ secrets.API_KEY }}
       BASE_URL: /${{ github.event.repository.name }}
     steps:
       - uses: actions/checkout@v4
